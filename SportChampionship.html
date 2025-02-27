@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sports Championship</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class="content">
+        <h1>Sports Championship</h1>
+        <p>The annual Sports Championship has begun, where athletes from different sports compete to showcase their skills!</p>
+        <p>Here are the number of participants in various sports categories:</p>
+        <div class="tables">
+            <div class="box">
+                <h2>Number of Participants in Basketball</h2>
+                <hr>
+                <p id="rand1"></p>
+            </div>
+            <div class="box">
+                <h2>Number of Participants in Football</h2>
+                <hr>
+                <p id="rand2"></p>
+            </div>
+            <div class="box">
+                <h2>Number of Participants in Tennis</h2>
+                <hr>
+                <p id="rand3"></p>
+            </div>
+        </div>
+        <p>The most participated sport is: </p>
+        <p id="mostFrequent"></p>
+        <p>The first athlete to register for the tournament has a name starting with the letter: <span id="letEquiv"></span></p>
+        <p>The total duration of the championship matches played so far is <span id="totalMin"></span> minutes, which is also equivalent to <span id="hoursTime"></span> hour/s and <span id="minutesTime"></span> minute/s.</p>
+    </div>
+
+    <script>
+    let num1 = Math.floor(Math.random() * 20) + 1;
+    let num2 = Math.floor(Math.random() * 20) + 1;
+    let num3 = Math.floor(Math.random() * 20) + 1;
+
+    document.getElementById("rand1").textContent = num1;
+    document.getElementById("rand2").textContent = num2;
+    document.getElementById("rand3").textContent = num3;
+
+    let max;
+    if (num1 >= num2 && num1 >= num3) {
+        max = num1;
+    } else if (num2 >= num1 && num2 >= num3) {
+        max = num2;
+    } else {
+        max = num3;
+    }
+
+    let mostFrequentText = "";
+    if (num1 === max && num2 === max && num3 === max) {
+        mostFrequentText = "Basketball, Football, and Tennis";
+    } else if (num1 === max && num2 === max) {
+        mostFrequentText = "Basketball and Football";
+    } else if (num1 === max && num3 === max) {
+        mostFrequentText = "Basketball and Tennis";
+    } else if (num2 === max && num3 === max) {
+        mostFrequentText = "Football and Tennis";
+    } else if (num1 === max) {
+        mostFrequentText = "Basketball";
+    } else if (num2 === max) {
+        mostFrequentText = "Football";
+    } else {
+        mostFrequentText = "Tennis";
+    }
+
+    document.getElementById("mostFrequent").textContent = mostFrequentText + " (" + max + " participants)";
+
+    function convertToLetter(num) {
+        return String.fromCharCode(64 + num);
+    }
+    document.getElementById("letEquiv").textContent = convertToLetter(num1);
+
+    var timeMinutes = num2 * num3;
+    document.getElementById("totalMin").textContent = timeMinutes;
+
+    var hourTime = Math.floor(timeMinutes / 60);
+    document.getElementById("hoursTime").textContent = hourTime;
+    var minTime = timeMinutes % 60;
+    document.getElementById("minutesTime").textContent = minTime;
+    
+    </script>
+    </body>
+</html>
